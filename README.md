@@ -2,7 +2,7 @@
 
 ## 概述
 
-OpenClaw PARTS Spectrum Profiler — 人机关系测评工具。
+OpenClaw PULSE Spectrum Profiler — 人机关系测评工具。
 
 基于 **BOND Profile**（16 种用户类型）、**ECHO Matrix**（16 种 Agent 类型）和 **PARTS Spectrum**（10 种关系类型）三层模型，对 OpenClaw 生态中的人机交互进行量化画像与关系诊断。
 
@@ -571,6 +571,6 @@ MIT License
 
 ---
 
-*Powered by OpenClaw PARTS Spectrum v1.0*
+*Powered by OpenClaw PULSE Spectrum v1.0*
 
 *理论基础: Dryer & Horowitz (1997), Edwards (1991/2008), Fiske (1992/2002), Furr (2008)*
