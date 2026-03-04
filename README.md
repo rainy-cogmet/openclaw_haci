@@ -261,10 +261,10 @@ Markdown 配置文件（SOUL.md 等）同理：先查根目录 → `.openclaw/` 
 
 | 族群 | 编码 | 色彩 | 特征 |
 |------|------|------|------|
-| 即用型工具派 | SU** | 💜 紫 | Sprint + Utility：快速调用、工具思维 |
-| 即时协作派 | SC** | 💛 黄 | Sprint + Companion：快速协作、伙伴关系 |
-| 长线工具派 | MU** | 💙 蓝 | Marathon + Utility：长期培养、系统构建 |
-| 深度伙伴派 | MC** | 💚 绿 | Marathon + Companion：长期深度、伙伴关系 |
+| 即用型工具派 | SU** | 紫 | Sprint + Utility：快速调用、工具思维 |
+| 即时协作派 | SC** | 黄 | Sprint + Companion：快速协作、伙伴关系 |
+| 长线工具派 | MU** | 蓝 | Marathon + Utility：长期培养、系统构建 |
+| 深度伙伴派 | MC** | 绿 | Marathon + Companion：长期深度、伙伴关系 |
 
 ### ECHO Matrix — 16 种 Agent 类型
 
@@ -417,7 +417,7 @@ Hidden Reef          0.25  0.35  0.40  0.45  0.30
 5. **echo_classifier** 将行为特征映射为 ECHO 四维连续得分 → 16 型
 6. **sync_matcher** 将 BOND+ECHO 交叉计算为 PARTS 五维 → 匹配 10 种关系类型
 7. **card_generator** 将三层结果渲染为 Markdown 报告
-8. **image_generator** 生成可视化图表（可选）
+8. **image_generator** 生成可视化图表（可选，依赖 matplotlib + numpy）
 
 ### 词库层（all_lexicons.py）
 
@@ -438,27 +438,30 @@ Hidden Reef          0.25  0.35  0.40  0.45  0.30
 
 ---
 
-## 文件清单
+## 目录结构
 
-| 文件 | 说明 |
-|------|------|
-| profiler.py | 主 CLI 入口 |
-| data_parser.py | 数据解析器（Session/Markdown/Memory/Heartbeat/Tools/Skills） |
-| feature_extractor.py | 统一特征提取器 |
-| bond_classifier.py | BOND Profile 分类器 |
-| echo_classifier.py | ECHO Matrix 分类器 |
-| sync_matcher.py | PARTS Spectrum 匹配器（含 `compute_parts()` 和 `run_parts_spectrum()`） |
-| card_generator.py | Markdown 报告生成器 |
-| image_generator.py | 图表生成器（matplotlib + numpy，可选） |
-| all_lexicons.py | 词库层（10 个词法分析器） |
-| type_definitions.py | 类型定义（BOND 16 型 / ECHO 16 型 / PARTS 10 型） |
-| utils.py | 通用工具（sigmoid、分词、多样性指标） |
-| mock_scenarios.py | 内置 Mock 演示场景 |
-| \_\_init\_\_.py | 包入口（导出 run_profile, FeatureExtractor 等） |
-| SKILL.md | OpenClaw Skill 格式文档 |
-| CHANGELOG_v31.md | v3.1 更新日志 |
-| README.md | 本文件 |
-| images/ | 预生成的 BOND/ECHO 类型图片（32 张） |
+```
+openclaw_haci/
+├── profiler.py             # 主 CLI 入口
+├── data_parser.py          # 数据解析器
+├── feature_extractor.py    # 统一特征提取器
+├── bond_classifier.py      # BOND Profile 分类器
+├── echo_classifier.py      # ECHO Matrix 分类器
+├── sync_matcher.py         # PARTS Spectrum 匹配器
+├── card_generator.py       # Markdown 报告生成器
+├── image_generator.py      # 图表生成器（matplotlib + numpy，可选）
+├── all_lexicons.py         # 词库层（10 个词法分析器）
+├── type_definitions.py     # 类型定义（BOND 16 型 / ECHO 16 型 / PARTS 10 型）
+├── utils.py                # 通用工具（sigmoid、分词、多样性指标）
+├── mock_scenarios.py       # 内置 Mock 演示场景
+├── __init__.py             # 包入口
+├── images/                 # 预生成的 BOND/ECHO 类型图片（32 张 PNG）
+├── SKILL.md                # OpenClaw Skill 格式文档
+├── README.md               # 本文件
+└── CHANGELOG_v31.md        # v3.1 更新日志
+```
+
+> **`images/` 目录**：包含 32 张预生成的类型卡片图片（PNG 格式），文件名为类型码（如 `MCRD.png`、`PGEC.png`、`RSFT.png`）。BOND 16 型 + ECHO 16 型各一张，扁平存放，无子目录。
 
 ---
 
@@ -502,9 +505,9 @@ python3 profiler.py --demo all -o ./demo_output --format both
 
 | 场景 | 用户风格 | Agent 风格 | 预期关系 |
 |------|---------|-----------|---------|
-| companion_luna | 深度伙伴派 (MC) | 温暖共情型 (PG\*E/C) | 知己 / 知心密友 |
-| commander_codeforge | 工具效率派 (SU) | 专精技术型 (RS\*\*) | 可信顾问 / 镜像对手 |
-| copilot_atlas | 均衡协作型 (MU) | 通才适配型 (RG\*\*) | 联合驾驶 / 可信顾问 |
+| companion_luna | 深度伙伴派 (MC) | 温暖共情型 (PG*E/C) | 知己 / 知心密友 |
+| commander_codeforge | 工具效率派 (SU) | 专精技术型 (RS**) | 可信顾问 / 镜像对手 |
+| copilot_atlas | 均衡协作型 (MU) | 通才适配型 (RG**) | 联合驾驶 / 可信顾问 |
 
 ---
 
