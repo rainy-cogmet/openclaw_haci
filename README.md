@@ -382,11 +382,6 @@ python3 test_e2e_v31.py
 
 MIT License
 
----
-
-## 作者
-
-孟昊宇
 
 ---
 
