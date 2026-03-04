@@ -1,3 +1,4 @@
+![SUPH](../images/cover.png)
 # 也许是最全面的人agent关系测试
 
 还在担心你和你的agent相性不合吗？
