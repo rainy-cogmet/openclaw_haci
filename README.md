@@ -140,51 +140,58 @@ cat data.json | python3 profiler.py --stdin --format json
 
 ### 方式 2: 目录结构 (--dir)
 
-支持多种目录布局，按优先级自动查找。
+支持 OpenClaw 标准目录结构，自动查找配置文件和对话记录。
 
-#### 布局 A: 扁平结构
+#### OpenClaw 标准架构
+
+**Agent 工作区**（Markdown 配置文件所在）：
 
 ```
-my_agent/
+/root/.openclaw/workspace/
 ├── SOUL.md              # Agent 灵魂设定（必需）
 ├── IDENTITY.md          # Agent 身份信息（必需）
 ├── USER.md              # 用户画像（可选）
 ├── AGENTS.md            # Agent 配置（可选）
+├── MEMORY.md            # 长期记忆（可选）
+├── TOOLS.md             # 本地工具配置（可选）
 ├── HEARTBEAT.md         # 心跳配置（可选）
-├── TOOLS.md             # 工具配置（可选）
-├── MEMORY.md            # 记忆文档（可选）
-├── memory/              # 记忆文件目录（可选）
-│   └── YYYY-MM-DD.md
-├── skills/              # 已安装 skills（可选）
-│   └── skill_name/
-│       └── SKILL.md
-└── sessions/            # 对话记录
-    ├── session_001.json
-    └── session_002.jsonl
+├── memory/              # 每日记忆（原始记录，可选）
+└── skills/              # 已安装的 skills
 ```
 
-#### 布局 B: OpenClaw 标准路径
+**系统目录**（对话记录所在）：
 
 ```
 /root/.openclaw/
-└── agents/
-    └── main/            # ← --dir 可指向这里，或指向包含 .openclaw/ 的父目录
-        ├── SOUL.md
-        ├── IDENTITY.md
-        └── sessions/
-            ├── sess_001.json
-            └── sess_002.json
+├── agents/
+│   └── main/                # 主 Agent
+│       ├── agent/           # Agent 配置
+│       └── sessions/        # 对话记录（.json / .jsonl）
+├── workspace/               # 工作区（链接到上面的 workspace）
+└── cron/                    # 定时任务
 ```
 
-**路径查找优先级：**
+#### 常用调用方式
 
-| 优先级 | sessions 路径 | 说明 |
-|--------|--------------|------|
+```bash
+# 分析工作区（自动搜索 workspace 下的配置 + agents/main/sessions/ 下的对话）
+python3 profiler.py --dir /root/.openclaw/
+
+# 直接指向工作区目录（配置文件在当前目录，sessions 需在 sessions/ 子目录或 .openclaw/ 下）
+python3 profiler.py --dir /root/.openclaw/workspace/
+```
+
+#### 路径查找优先级
+
+**sessions 目录查找**（按优先级）：
+
+| 优先级 | 路径 | 说明 |
+|--------|------|------|
 | 1 | `<dirpath>/sessions/` | 扁平结构 |
 | 2 | `<dirpath>/.openclaw/sessions/` | .openclaw 子目录 |
 | 3 | `<dirpath>/.openclaw/agents/*/sessions/` | OpenClaw 标准路径（自动扫描） |
 
-Markdown 配置文件（SOUL.md 等）同理：先查根目录 → `.openclaw/` → `.openclaw/agents/*/`。
+**Markdown 配置文件查找**（SOUL.md / IDENTITY.md 等）同理：先查指定目录 → `.openclaw/` → `.openclaw/agents/*/`。支持大小写不敏感（SOUL.md / soul.md 均可）。
 
 ---
 
@@ -438,24 +445,58 @@ Hidden Reef          0.25  0.35  0.40  0.45  0.30
 
 ---
 
-## 目录结构
+## OpenClaw 目录架构
+
+### Agent 工作区
 
 ```
-openclaw_haci/
+/root/.openclaw/workspace/
+├── SOUL.md              # Agent 灵魂设定（必需）
+├── IDENTITY.md          # Agent 身份信息（必需）
+├── USER.md              # 用户画像（可选）
+├── AGENTS.md            # Agent 配置（可选）
+├── MEMORY.md            # 长期记忆（可选）
+├── TOOLS.md             # 本地工具配置（可选）
+├── HEARTBEAT.md         # 心跳配置（可选）
+├── memory/              # 每日记忆（原始记录，可选）
+└── skills/              # 已安装的 skills
+    └── openclaw-profiler/
+        ├── SKILL.md     # 技能文档
+        └── *.py         # 测评引擎代码
+```
+
+### OpenClaw 系统目录
+
+```
+/root/.openclaw/
+├── agents/
+│   └── main/                # 主 Agent
+│       ├── agent/           # Agent 配置
+│       └── sessions/        # 对话记录目录（.json / .jsonl）
+├── workspace/               # 工作区（链接到上面的 workspace）
+└── cron/                    # 定时任务
+```
+
+---
+
+## Profiler 文件清单
+
+```
+openclaw-profiler/
 ├── profiler.py             # 主 CLI 入口
-├── data_parser.py          # 数据解析器
+├── data_parser.py          # 数据解析器（5 种 JSON + 目录结构 + Markdown 配置）
 ├── feature_extractor.py    # 统一特征提取器
 ├── bond_classifier.py      # BOND Profile 分类器
 ├── echo_classifier.py      # ECHO Matrix 分类器
 ├── sync_matcher.py         # PARTS Spectrum 匹配器
 ├── card_generator.py       # Markdown 报告生成器
-├── image_generator.py      # 图表生成器（matplotlib + numpy，可选）
+├── image_generator.py      # 图表生成器（matplotlib + numpy，可选，lazy import）
 ├── all_lexicons.py         # 词库层（10 个词法分析器）
 ├── type_definitions.py     # 类型定义（BOND 16 型 / ECHO 16 型 / PARTS 10 型）
 ├── utils.py                # 通用工具（sigmoid、分词、多样性指标）
 ├── mock_scenarios.py       # 内置 Mock 演示场景
 ├── __init__.py             # 包入口
-├── images/                 # 预生成的 BOND/ECHO 类型图片（32 张 PNG）
+├── images/                 # 预生成的 BOND/ECHO 类型图片（32 张 PNG，扁平存放）
 ├── SKILL.md                # OpenClaw Skill 格式文档
 ├── README.md               # 本文件
 └── CHANGELOG_v31.md        # v3.1 更新日志
