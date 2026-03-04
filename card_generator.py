@@ -628,3 +628,4 @@ def generate_markdown_report(
 # ===================================================================
 
 render_full_report = generate_markdown_report
+generate_full_report = generate_markdown_report
