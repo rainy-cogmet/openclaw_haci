@@ -3,7 +3,7 @@ name: openclaw-profiler
 description: |
   OpenClaw PULSE Spectrum Profiler — 人机关系测评工具。
   基于 BOND Profile（16 种用户类型）、ECHO Matrix（16 种 Agent 类型）和
-  PARTS Spectrum（10 种关系类型）三层模型，对 OpenClaw 生态中的人机交互
+  PULSE Spectrum（10 种关系类型）三层模型，对 OpenClaw 生态中的人机交互
   进行量化画像与关系诊断。
   触发场景：(1) 用户要求分析人机关系或交互风格；(2) 用户要求对 Agent 或用户进行画像分类；
   (3) 用户提供了 OpenClaw 数据包（含 SOUL.md / IDENTITY.md / sessions 等）要求诊断；
@@ -11,7 +11,7 @@ description: |
   触发关键词：BOND、ECHO、PARTS、HACI、人机关系、测评、画像、关系诊断、Profiler。
 ---
 
-# OpenClaw PARTS Spectrum Profiler
+# OpenClaw PULSE Spectrum Profiler
 
 人机关系测评工具。输入 OpenClaw 标准数据，输出用户画像（BOND 16 型）、Agent 画像（ECHO 16 型）、关系诊断（PARTS 10 型）。
 
