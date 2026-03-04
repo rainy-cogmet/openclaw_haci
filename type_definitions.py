@@ -341,65 +341,87 @@ ECHO_DIM_LABELS = {
 # 通过 RTAPS 五维评分（Resonance, Tempo, Agency, Precision, Synergy）聚类
 
 SYNC_TYPES = {
+    # type_definitions.py — SYNC_TYPES 字典
+    
+    # 1. Confidant: 知己 → 灵魂搭档
     "Confidant": {
-        "name": "知己",
-        "en_name": "Confidant",
+        "name": "灵魂搭档",           # was: "知己"
+        "en_name": "The Kindred Spirit",  # was: "Confidant"
         "desc": "深度情感共鸣，彼此高度信任，对话有温度有记忆",
         "keywords": "高共鸣·高协同·情感记忆",
     },
+    
+    # 2. Co-pilot: 副驾驶 → 联合驾驶
     "Co-pilot": {
-        "name": "副驾驶",
-        "en_name": "Co-pilot",
+        "name": "联合驾驶",            # was: "副驾驶"
+        "en_name": "The Co-pilot",       # was: "Co-pilot"
         "desc": "并肩作战的搭档，节奏同步，分工默契",
         "keywords": "高节奏匹配·高协同·均衡精度",
     },
+    
+    # 3. Trusted Advisor: 军师 → 可信顾问
     "Trusted Advisor": {
-        "name": "军师",
-        "en_name": "Trusted Advisor",
+        "name": "可信顾问",            # was: "军师"
+        "en_name": "The Trusted Advisor", # was: "Trusted Advisor"
         "desc": "被信赖的策略顾问，提供方向但尊重决策权",
         "keywords": "高共鸣·高主导权让渡·高精度",
     },
+    
+    # 4. Mentor: 导师 → 单相思
     "Mentor": {
-        "name": "导师",
-        "en_name": "Mentor",
+        "name": "单相思",              # was: "导师"
+        "en_name": "The Unrequited",     # was: "Mentor"
         "desc": "耐心引导成长，既有专业深度又有情感关怀",
         "keywords": "持续陪伴·知识传递·成长导向",
     },
+    
+    # 5. Catalyst: 催化剂 → 快枪手
     "Catalyst": {
-        "name": "催化剂",
-        "en_name": "Catalyst",
+        "name": "快枪手",              # was: "催化剂"
+        "en_name": "The Quick-draw",     # was: "Catalyst"
         "desc": "激发灵感和新思路，让对话产生意料之外的化学反应",
         "keywords": "低预设·高惊喜·创意碰撞",
     },
+    
+    # 6. Guardian: 守门员 → 鸡同鸭讲
     "Guardian": {
-        "name": "守门员",
-        "en_name": "Guardian",
+        "name": "鸡同鸭讲",            # was: "守门员"
+        "en_name": "The Lost in Translation", # was: "Guardian"
         "desc": "默默把关质量和安全，只在关键时刻出手干预",
         "keywords": "低干扰·高可靠·底线思维",
     },
+    
+    # 7. Delegate: 代理人 → 自动售货机
     "Delegate": {
-        "name": "代理人",
-        "en_name": "Delegate",
+        "name": "自动售货机",           # was: "代理人"
+        "en_name": "The Vending Machine", # was: "Delegate"
         "desc": "高度自治执行任务，像个靠谱的外包团队",
         "keywords": "高自治·低干预·结果导向",
     },
+    
+    # 8. Mirror: 镜子 → 知心密友
     "Mirror": {
-        "name": "镜子",
-        "en_name": "Mirror",
+        "name": "知心密友",            # was: "镜子"
+        "en_name": "The Confidant",      # was: "Mirror"
         "desc": "忠实反映用户的想法和风格，帮你看清自己的思路",
         "keywords": "高还原·低主见·风格映射",
     },
+    
+    # 9. Orchestrator: 指挥家 → 指挥与副官
     "Orchestrator": {
-        "name": "指挥家",
-        "en_name": "Orchestrator",
+        "name": "指挥与副官",           # was: "指挥家"
+        "en_name": "The Commander & Lieutenant", # was: "Orchestrator"
         "desc": "统筹全局、协调多方资源，把复杂任务变成有序乐章",
         "keywords": "高统筹·高精度·系统思维",
     },
+    
+    # 10. Sparring Partner: 陪练 → 切磋对手
     "Sparring Partner": {
-        "name": "陪练",
-        "en_name": "Sparring Partner",
+        "name": "切磋对手",            # was: "陪练"
+        "en_name": "The Sparring Partner", # was: "Sparring Partner"
         "desc": "针锋相对但不带敌意，通过对抗让你变强",
         "keywords": "高对抗·高成长·压力测试",
+    
     },
 }
 
