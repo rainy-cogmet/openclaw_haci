@@ -86,6 +86,20 @@ description: |
 - 分析当前 Agent：`python3 profiler.py --dir /root/.openclaw/workspace/`
 - 分析系统目录：`python3 profiler.py --dir /root/.openclaw/`（会自动搜索 agents/*/sessions/）
 
+**当 sessions 不在 workspace 目录下时**：
+如果 SOUL.md/IDENTITY.md 在 workspace 目录下，但 sessions 在其他位置（如 `/root/.openclaw/agents/main/sessions/`），可以创建符号链接：
+
+```bash
+# 在 workspace 目录下创建符号链接指向 sessions 目录
+cd /root/.openclaw/workspace
+ln -sf /root/.openclaw/agents/main/sessions ./sessions
+
+# 然后就可以正常分析了
+python3 profiler.py --dir /root/.openclaw/workspace/
+```
+
+这样 DataParser.parse_directory() 就能同时找到配置文件和会话记录了！
+
 ### 第二步：执行分析
 
 ```bash
